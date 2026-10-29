@@ -1,0 +1,22 @@
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: scripture-room-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scripture_room
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - scripture_room_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d scripture_room"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  scripture_room_data:
