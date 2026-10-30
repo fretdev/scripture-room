@@ -5,7 +5,7 @@ services:
     container_name: scripture-room-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: scripture_room
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
